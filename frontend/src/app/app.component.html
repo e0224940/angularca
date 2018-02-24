@@ -1,0 +1,41 @@
+<app-search-component (changeUserRequest)="onUserChanged($event)" (newSearchRequest)="onNewSearchTriggered($event)"></app-search-component>
+
+<div class="container" *ngIf="results">
+    <h2><u>Gifs in {{searchString}}</u></h2>
+    <div class="row" *ngFor="let result of results">
+        <div class="form-group">
+            <img src="{{result.images.downsized.url}}" height="200px" width="200px" />
+        </div>
+        <!-- TODO : Add title to the database 
+        <div class="form-group">
+            <label>{{result.title}}</label>
+        </div>
+        -->
+        <div class="form-group">
+            <button class="btn btn-success" (click)="StoreResult(result.images.downsized.url)">Add</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-inline">
+            <button class="btn btn-primary" *ngIf="offset != 0" (click)="GetPreviousSet()">&lt;&lt; Prev</button>
+            <button class="btn btn-primary" (click)="GetNextSet()">Next &gt;&gt;</button>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="storedResults">
+    <h2><u>Gifs in {{currUser}}</u></h2>
+    <div class="row" *ngFor="let temp of storedResults">
+        <div class="form-group">
+            <img src="{{temp.url}}" height="200px" width="200px" />
+        </div>
+        <!-- TODO : Title and remove button 
+        <div class="form-group">
+            <label>{{temp.title}}</label>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-danger" (click)="RemoveResult(temp.url)">Remove</button>
+        </div>
+        -->
+    </div>
+</div>
